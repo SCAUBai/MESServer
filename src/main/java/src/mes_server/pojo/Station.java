@@ -1,25 +1,19 @@
 package src.mes_server.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import lombok.ToString;
 
 @Data
 public class Station {
+    @TableId("station_id")
     private int id;
+    @TableField("station_name")
     private String name;
     private String status;
+    @TableField("station_type")
     private String type;
     private String place;
-
-    public Station() {
-    }
-
-    public Station(int id, String name, String status, String type, String place) {
-        this.id = id;
-        this.name = name;
-        this.status = status;
-        this.type = type;
-        this.place = place;
-    }
 }
