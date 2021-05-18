@@ -14,8 +14,8 @@ public class ProcessController {
     private ProcessServerImpl server;
 
     @PostMapping("/addPC")
-    public void addProcess(@RequestBody Process process) {
-        server.add(process);
+    public String addProcess(@RequestBody Process process) {
+        return server.add(process);
     }
 
     @GetMapping("/selectPC")

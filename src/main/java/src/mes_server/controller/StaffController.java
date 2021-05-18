@@ -14,8 +14,8 @@ public class StaffController {
     private StaffServerImpl server;
 
     @PostMapping("/addST")
-    public void addStaff(@RequestBody Staff staff) {
-        server.add(staff);
+    public String addStaff(@RequestBody Staff staff) {
+        return server.add(staff);
     }
 
     @GetMapping("/selectST")

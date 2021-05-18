@@ -14,8 +14,8 @@ public class MaterialController {
     private MaterialServerImpl server;
 
     @PostMapping("/addMT")
-    public void addMaterial(@RequestBody Material material) {
-        server.add(material);
+    public String addMaterial(@RequestBody Material material) {
+        return server.add(material);
     }
 
     @GetMapping("/selectMT")

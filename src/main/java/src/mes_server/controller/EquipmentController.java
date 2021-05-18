@@ -14,9 +14,8 @@ public class EquipmentController {
     private EquipmentServerImpl server;
 
     @PostMapping("/addEM")
-    public void addEquipment(@RequestBody Equipment equipment) {
-        System.out.println(equipment);
-        server.add(equipment);
+    public String addEquipment(@RequestBody Equipment equipment) {
+        return server.add(equipment);
     }
 
     @GetMapping("/selectEM")

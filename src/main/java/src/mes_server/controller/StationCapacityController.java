@@ -14,8 +14,8 @@ public class StationCapacityController {
     private StationCapacityServerImpl server;
 
     @PostMapping("/addSC")
-    public void addStationCapacity(@RequestBody StationCapacity station) {
-        server.add(station);
+    public String addStationCapacity(@RequestBody StationCapacity station) {
+        return server.add(station);
     }
 
     @GetMapping("/selectSC")

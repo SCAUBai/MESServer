@@ -14,8 +14,8 @@ public class RulesController {
     private RulesServerImpl server;
 
     @PostMapping("/addRU")
-    public void addRules(@RequestBody Rules rules) {
-        server.add(rules);
+    public String addRules(@RequestBody Rules rules) {
+        return server.add(rules);
     }
 
     @GetMapping("/selectRU")

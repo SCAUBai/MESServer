@@ -14,8 +14,8 @@ public class ProductionController {
     private ProductionServerImpl server;
 
     @PostMapping("/addPD")
-    public void addProduction(@RequestBody Production production) {
-        server.add(production);
+    public String addProduction(@RequestBody Production production) {
+        return server.add(production);
     }
 
     @GetMapping("/selectPD")

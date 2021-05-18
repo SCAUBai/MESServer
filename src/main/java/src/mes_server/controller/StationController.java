@@ -14,8 +14,8 @@ public class StationController {
     private StationServerImpl server;
 
     @PostMapping("/addSTA")
-    public void addStation(@RequestBody Station station) {
-        server.add(station);
+    public String addStation(@RequestBody Station station) {
+        return server.add(station);
     }
 
     @GetMapping("/selectSTA")
