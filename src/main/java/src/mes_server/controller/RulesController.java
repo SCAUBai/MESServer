@@ -1,8 +1,6 @@
 package src.mes_server.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Rules;
 import src.mes_server.server.RulesServerImpl;
 
@@ -15,9 +13,8 @@ public class RulesController {
     @Resource
     private RulesServerImpl server;
 
-    @GetMapping("/addRU")
-    public void addRules() {
-        Rules rules = new Rules();
+    @PostMapping("/addRU")
+    public void addRules(@RequestBody Rules rules) {
         server.add(rules);
     }
 
@@ -29,20 +26,20 @@ public class RulesController {
         return select;
     }
 
-    @GetMapping("/selectRUL")
-    public List<Rules> selectList(@RequestParam List ids) {
+    @PostMapping("/selectRUL")
+    public List<Rules> selectList(@RequestBody List ids) {
         List<Rules> select = server.select(ids);
         return select;
     }
 
-    @GetMapping("/selectRUM")
-    public List<Rules> selectList(@RequestParam Map map) {
+    @PostMapping("/selectRUM")
+    public List<Rules> selectList(@RequestBody Map map) {
         List<Rules> select = server.select(map);
         return select;
     }
 
-    @GetMapping("/updateRU")
-    public String update(@RequestParam Rules rules) {
+    @PostMapping("/updateRU")
+    public String update(@RequestBody Rules rules) {
         return server.updateById(rules);
     }
 
@@ -51,8 +48,8 @@ public class RulesController {
         return server.delete(id);
     }
 
-    @GetMapping("/deleteRUM")
-    public String delete(@RequestParam Map map) {
+    @PostMapping("/deleteRUM")
+    public String delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }

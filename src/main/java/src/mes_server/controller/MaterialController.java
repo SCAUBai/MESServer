@@ -1,8 +1,6 @@
 package src.mes_server.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Material;
 import src.mes_server.server.MaterialServerImpl;
 
@@ -15,9 +13,8 @@ public class MaterialController {
     @Resource
     private MaterialServerImpl server;
 
-    @GetMapping("/addMT")
-    public void addMaterial() {
-        Material material = new Material();
+    @PostMapping("/addMT")
+    public void addMaterial(@RequestBody Material material) {
         server.add(material);
     }
 
@@ -29,20 +26,20 @@ public class MaterialController {
         return select;
     }
 
-    @GetMapping("/selectMTL")
-    public List<Material> selectList(@RequestParam List ids) {
+    @PostMapping("/selectMTL")
+    public List<Material> selectList(@RequestBody List ids) {
         List<Material> select = server.select(ids);
         return select;
     }
 
-    @GetMapping("/selectMTM")
-    public List<Material> selectList(@RequestParam Map map) {
+    @PostMapping("/selectMTM")
+    public List<Material> selectList(@RequestBody Map map) {
         List<Material> select = server.select(map);
         return select;
     }
 
-    @GetMapping("/updateMT")
-    public String update(@RequestParam Material material) {
+    @PostMapping("/updateMT")
+    public String update(@RequestBody Material material) {
         return server.updateById(material);
     }
 
@@ -51,8 +48,8 @@ public class MaterialController {
         return server.delete(id);
     }
 
-    @GetMapping("/deleteMTM")
-    public String delete(@RequestParam Map map) {
+    @PostMapping("/deleteMTM")
+    public String delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }

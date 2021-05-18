@@ -1,8 +1,6 @@
 package src.mes_server.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Staff;
 import src.mes_server.server.StaffServerImpl;
 
@@ -15,43 +13,42 @@ public class StaffController {
     @Resource
     private StaffServerImpl server;
 
-    @GetMapping("/addST")
-    public void addStaff() {
-        Staff staff = new Staff();
+    @PostMapping("/addST")
+    public void addStaff(@RequestBody Staff staff) {
         server.add(staff);
     }
 
     @GetMapping("/selectST")
-    public Staff select(@RequestParam int id) {
+    public Staff select(@RequestParam("id") int id) {
         System.out.println(id);
         Staff select = server.select(id);
         System.out.println(select);
         return select;
     }
 
-    @GetMapping("/selectSTL")
-    public List<Staff> selectList(@RequestParam List ids) {
+    @PostMapping("/selectSTL")
+    public List<Staff> selectList(@RequestBody List ids) {
         List<Staff> select = server.select(ids);
         return select;
     }
 
-    @GetMapping("/selectSTM")
-    public List<Staff> selectList(@RequestParam Map map) {
+    @PostMapping("/selectSTM")
+    public List<Staff> selectList(@RequestBody Map map) {
         List<Staff> select = server.select(map);
         return select;
     }
 
-    @GetMapping("/updateST")
-    public String update(@RequestParam Staff staff) {
+    @PostMapping("/updateST")
+    public String update(@RequestBody Staff staff) {
         return server.updateById(staff);
     }
 
     @GetMapping("/deleteST")
-    public String delete(@RequestParam int id) {
+    public String delete(@RequestParam("id") int id) {
         return server.delete(id);
     }
 
-    @GetMapping("/deleteSTM")
+    @PostMapping("/deleteSTM")
     public String delete(@RequestParam Map map) {
         return server.delete(map);
     }

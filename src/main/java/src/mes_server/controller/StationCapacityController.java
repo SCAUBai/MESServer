@@ -1,8 +1,6 @@
 package src.mes_server.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.StationCapacity;
 import src.mes_server.server.StationCapacityServerImpl;
 
@@ -15,33 +13,32 @@ public class StationCapacityController {
     @Resource
     private StationCapacityServerImpl server;
 
-    @GetMapping("/addSC")
-    public void addStationCapacity() {
-        StationCapacity station = new StationCapacity();
+    @PostMapping("/addSC")
+    public void addStationCapacity(@RequestBody StationCapacity station) {
         server.add(station);
     }
 
     @GetMapping("/selectSC")
-    public StationCapacity select(@RequestParam int id) {
+    public StationCapacity select(@RequestParam("id") int id) {
         System.out.println(id);
         StationCapacity select = server.select(id);
         System.out.println(select);
         return select;
     }
 
-    @GetMapping("/selectSCL")
-    public List<StationCapacity> selectList(@RequestParam List ids) {
+    @PostMapping("/selectSCL")
+    public List<StationCapacity> selectList(@RequestBody List ids) {
         List<StationCapacity> select = server.select(ids);
         return select;
     }
 
-    @GetMapping("/selectSCM")
+    @PostMapping("/selectSCM")
     public List<StationCapacity> selectList(@RequestParam Map map) {
         List<StationCapacity> select = server.select(map);
         return select;
     }
 
-    @GetMapping("/updateSC")
+    @PostMapping("/updateSC")
     public String update(@RequestParam StationCapacity station) {
         return server.updateById(station);
     }
@@ -51,7 +48,7 @@ public class StationCapacityController {
         return server.delete(id);
     }
 
-    @GetMapping("/deleteSCM")
+    @PostMapping("/deleteSCM")
     public String delete(@RequestParam Map map) {
         return server.delete(map);
     }

@@ -1,9 +1,6 @@
 package src.mes_server.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Equipment;
 import src.mes_server.server.EquipmentServerImpl;
 
@@ -16,48 +13,44 @@ public class EquipmentController {
     @Resource
     private EquipmentServerImpl server;
 
-    @GetMapping("/addEM")
-    public void addEquipment() {
-        Equipment equipment = new Equipment();
-//        equipment.setEName("A02");
-//        equipment.setEquipmentId(2);
-//        equipment.setEType("A");
+    @PostMapping("/addEM")
+    public void addEquipment(@RequestBody Equipment equipment) {
         System.out.println(equipment);
         server.add(equipment);
     }
 
     @GetMapping("/selectEM")
-    public Equipment select(@RequestParam int id) {
+    public Equipment select(@RequestParam("id") int id) {
         System.out.println(id);
         Equipment select = server.select(id);
         System.out.println(select);
         return select;
     }
 
-    @GetMapping("/selectEML")
-    public List<Equipment> selectList(@RequestParam List ids) {
+    @PostMapping("/selectEML")
+    public List<Equipment> selectList(@RequestBody List ids) {
         List<Equipment> select = server.select(ids);
         return select;
     }
 
-    @GetMapping("/selectEMM")
-    public List<Equipment> selectList(@RequestParam Map map) {
+    @PostMapping("/selectEMM")
+    public List<Equipment> selectList(@RequestBody Map map) {
         List<Equipment> select = server.select(map);
         return select;
     }
 
-    @GetMapping("/updateEM")
-    public String update(@RequestParam Equipment equipment) {
+    @PostMapping("/updateEM")
+    public String update(@RequestBody Equipment equipment) {
         return server.updateById(equipment);
     }
 
     @GetMapping("/deleteEM")
-    public String delete(@RequestParam int id) {
+    public String delete(@RequestParam("id") int id) {
         return server.delete(id);
     }
 
-    @GetMapping("/deleteEMM")
-    public String delete(@RequestParam Map map) {
+    @PostMapping("/deleteEMM")
+    public String delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }

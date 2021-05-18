@@ -1,8 +1,6 @@
 package src.mes_server.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Process;
 import src.mes_server.server.ProcessServerImpl;
 
@@ -15,9 +13,8 @@ public class ProcessController {
     @Resource
     private ProcessServerImpl server;
 
-    @GetMapping("/addPC")
-    public void addProcess() {
-        Process process = new Process();
+    @PostMapping("/addPC")
+    public void addProcess(@RequestBody Process process) {
         server.add(process);
     }
 
@@ -29,20 +26,20 @@ public class ProcessController {
         return select;
     }
 
-    @GetMapping("/selectPCL")
-    public List<Process> selectList(@RequestParam List ids) {
+    @PostMapping("/selectPCL")
+    public List<Process> selectList(@RequestBody List ids) {
         List<Process> select = server.select(ids);
         return select;
     }
 
-    @GetMapping("/selectPCM")
-    public List<Process> selectList(@RequestParam Map map) {
+    @PostMapping("/selectPCM")
+    public List<Process> selectList(@RequestBody Map map) {
         List<Process> select = server.select(map);
         return select;
     }
 
-    @GetMapping("/updatePC")
-    public String update(@RequestParam Process process) {
+    @PostMapping("/updatePC")
+    public String update(@RequestBody Process process) {
         return server.updateById(process);
     }
 
@@ -51,8 +48,8 @@ public class ProcessController {
         return server.delete(id);
     }
 
-    @GetMapping("/deletePCM")
-    public String delete(@RequestParam Map map) {
+    @PostMapping("/deletePCM")
+    public String delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }
