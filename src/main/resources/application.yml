@@ -1,19 +1,25 @@
 server:
   port: 8080
 spring:
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .jsp
   datasource:
-    url: jdbc:mysql://localhost:3306/database_system?characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/mes_system?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    axWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 30000
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
 
-mybatis:
+mybatis-plus:
   mapper-locations: classpath:mappers/*Mapper.xml
   type-aliases-package: src.mes_server.pojo,;src.mes_server.dto

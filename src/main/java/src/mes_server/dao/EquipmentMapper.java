@@ -6,6 +6,4 @@ import src.mes_server.pojo.Equipment;
 
 public interface EquipmentMapper extends BaseMapper<Equipment> {
 
-//    int updateEM(Integer id, Integer newId, String name, String type);
-
 }
