@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@RestController("/MT")
 public class MaterialController {
     @Resource
     private MaterialServerImpl server;

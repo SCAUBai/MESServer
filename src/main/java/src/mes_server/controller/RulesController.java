@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@RestController("RU")
 public class RulesController {
     @Resource
     private RulesServerImpl server;

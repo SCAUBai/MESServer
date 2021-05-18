@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@RestController("PC")
 public class ProcessController {
     @Resource
     private ProcessServerImpl server;

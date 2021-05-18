@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@RestController("PD")
 public class ProductionController {
     @Resource
     private ProductionServerImpl server;
