@@ -5,6 +5,8 @@ import src.mes_server.dao.RulesMapper;
 import src.mes_server.dao.StaffMapper;
 import src.mes_server.pojo.Rules;
 import src.mes_server.pojo.Staff;
+import src.mes_server.result.BaseResult;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.utils.ResultUtil;
 
 import javax.annotation.Resource;
@@ -16,9 +18,9 @@ public class StaffServerImpl {
     @Resource
     private StaffMapper mapper;
 
-    public String add(Staff staff) {
+    public ResultEnum add(Staff staff) {
         int insert = mapper.insert(staff);
-        return ResultUtil.returnString(1, insert);
+        return ResultUtil.returnString(1, insert, BaseResult.INSERT.name());
     }
 
     public Staff select(int id) {
@@ -35,17 +37,17 @@ public class StaffServerImpl {
         return mapper.selectByMap(map);
     }
 
-    public String updateById(Staff staff) {
+    public ResultEnum updateById(Staff staff) {
         int i = mapper.updateById(staff);
-        return ResultUtil.returnString(1, i);
+        return ResultUtil.returnString(1, i, BaseResult.UPDATE.name());
     }
 
-    public String delete(int id) {
-        return ResultUtil.returnString(1, mapper.deleteById(id));
+    public ResultEnum delete(int id) {
+        return ResultUtil.returnString(1, mapper.deleteById(id), BaseResult.DELETE.name());
     }
 
-    public String delete(Map map) {
-        return ResultUtil.returnString(mapper.deleteByMap(map));
+    public ResultEnum delete(Map map) {
+        return ResultUtil.returnString(mapper.deleteByMap(map), BaseResult.DELETE.name());
     }
 
 }

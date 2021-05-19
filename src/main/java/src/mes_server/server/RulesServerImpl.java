@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import src.mes_server.dao.RulesMapper;
 import src.mes_server.pojo.Production;
 import src.mes_server.pojo.Rules;
+import src.mes_server.result.BaseResult;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.utils.ResultUtil;
 
 import javax.annotation.Resource;
@@ -15,9 +17,9 @@ public class RulesServerImpl {
     @Resource
     private RulesMapper mapper;
 
-    public String add(Rules rules) {
+    public ResultEnum add(Rules rules) {
         int insert = mapper.insert(rules);
-        return ResultUtil.returnString(1, insert);
+        return ResultUtil.returnString(1, insert, BaseResult.DELETE.name());
     }
 
     public Rules select(int id) {
@@ -34,17 +36,17 @@ public class RulesServerImpl {
         return mapper.selectByMap(map);
     }
 
-    public String updateById(Rules rules) {
+    public ResultEnum updateById(Rules rules) {
         int i = mapper.updateById(rules);
-        return ResultUtil.returnString(1, i);
+        return ResultUtil.returnString(1, i, BaseResult.UPDATE.name());
     }
 
-    public String delete(int id) {
-        return ResultUtil.returnString(1, mapper.deleteById(id));
+    public ResultEnum delete(int id) {
+        return ResultUtil.returnString(1, mapper.deleteById(id), BaseResult.DELETE.name());
     }
 
-    public String delete(Map map) {
-        return ResultUtil.returnString(mapper.deleteByMap(map));
+    public ResultEnum delete(Map map) {
+        return ResultUtil.returnString(mapper.deleteByMap(map), BaseResult.DELETE.name());
     }
 
 }

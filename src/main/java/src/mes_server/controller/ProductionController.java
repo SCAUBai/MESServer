@@ -2,6 +2,7 @@ package src.mes_server.controller;
 
 import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Production;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.server.ProductionServerImpl;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class ProductionController {
     private ProductionServerImpl server;
 
     @PostMapping("/addPD")
-    public String addProduction(@RequestBody Production production) {
+    public ResultEnum addProduction(@RequestBody Production production) {
         return server.add(production);
     }
 
@@ -39,17 +40,17 @@ public class ProductionController {
     }
 
     @PostMapping("/updatePD")
-    public String update(@RequestBody Production production) {
+    public ResultEnum update(@RequestBody Production production) {
         return server.updateById(production);
     }
 
     @GetMapping("/deletePD")
-    public String delete(@RequestParam("id") int id) {
+    public ResultEnum delete(@RequestParam("id") int id) {
         return server.delete(id);
     }
 
     @PostMapping("/deletePDM")
-    public String delete(@RequestBody Map map) {
+    public ResultEnum delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }

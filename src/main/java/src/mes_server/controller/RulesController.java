@@ -2,6 +2,7 @@ package src.mes_server.controller;
 
 import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Rules;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.server.RulesServerImpl;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class RulesController {
     private RulesServerImpl server;
 
     @PostMapping("/addRU")
-    public String addRules(@RequestBody Rules rules) {
+    public ResultEnum addRules(@RequestBody Rules rules) {
         return server.add(rules);
     }
 
@@ -39,17 +40,17 @@ public class RulesController {
     }
 
     @PostMapping("/updateRU")
-    public String update(@RequestBody Rules rules) {
+    public ResultEnum update(@RequestBody Rules rules) {
         return server.updateById(rules);
     }
 
     @GetMapping("/deleteRU")
-    public String delete(@RequestParam int id) {
+    public ResultEnum delete(@RequestParam int id) {
         return server.delete(id);
     }
 
     @PostMapping("/deleteRUM")
-    public String delete(@RequestBody Map map) {
+    public ResultEnum delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }

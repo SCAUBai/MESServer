@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 import src.mes_server.dao.EquipmentMapper;
 import src.mes_server.pojo.Equipment;
+import src.mes_server.result.BaseResult;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.utils.ResultUtil;
 
 import javax.annotation.Resource;
@@ -15,9 +17,9 @@ public class EquipmentServerImpl {
     @Resource
     private EquipmentMapper equipmentMapper;
 
-    public String add(Equipment equipment) {
+    public ResultEnum add(Equipment equipment) {
         int insert = equipmentMapper.insert(equipment);
-        return ResultUtil.returnString(1, insert);
+        return ResultUtil.returnString(1, insert, BaseResult.INSERT.name());
     }
 
     public Equipment select(int id) {
@@ -35,17 +37,17 @@ public class EquipmentServerImpl {
         return equipmentMapper.selectByMap(map);
     }
 
-    public String updateById(Equipment equipment) {
+    public ResultEnum updateById(Equipment equipment) {
         int i = equipmentMapper.updateById(equipment);
-        return ResultUtil.returnString(1, i);
+        return ResultUtil.returnString(1, i, BaseResult.UPDATE.name());
     }
 
-    public String delete(int id) {
-        return ResultUtil.returnString(1, equipmentMapper.deleteById(id));
+    public ResultEnum delete(int id) {
+        return ResultUtil.returnString(1, equipmentMapper.deleteById(id), BaseResult.DELETE.name());
     }
 
-    public String delete(Map map) {
-        return ResultUtil.returnString(equipmentMapper.deleteByMap(map));
+    public ResultEnum delete(Map map) {
+        return ResultUtil.returnString(equipmentMapper.deleteByMap(map), BaseResult.DELETE.name());
     }
 
 }

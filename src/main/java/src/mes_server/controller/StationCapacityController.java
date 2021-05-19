@@ -2,6 +2,7 @@ package src.mes_server.controller;
 
 import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.StationCapacity;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.server.StationCapacityServerImpl;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class StationCapacityController {
     private StationCapacityServerImpl server;
 
     @PostMapping("/addSC")
-    public String addStationCapacity(@RequestBody StationCapacity station) {
+    public ResultEnum addStationCapacity(@RequestBody StationCapacity station) {
         return server.add(station);
     }
 
@@ -39,17 +40,17 @@ public class StationCapacityController {
     }
 
     @PostMapping("/updateSC")
-    public String update(@RequestParam StationCapacity station) {
+    public ResultEnum update(@RequestParam StationCapacity station) {
         return server.updateById(station);
     }
 
     @GetMapping("/deleteSC")
-    public String delete(@RequestParam int id) {
+    public ResultEnum delete(@RequestParam int id) {
         return server.delete(id);
     }
 
     @PostMapping("/deleteSCM")
-    public String delete(@RequestParam Map map) {
+    public ResultEnum delete(@RequestParam Map map) {
         return server.delete(map);
     }
 }

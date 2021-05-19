@@ -5,6 +5,8 @@ import src.mes_server.dao.StaffMapper;
 import src.mes_server.dao.StationCapacityMapper;
 import src.mes_server.pojo.Staff;
 import src.mes_server.pojo.StationCapacity;
+import src.mes_server.result.BaseResult;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.utils.ResultUtil;
 
 import javax.annotation.Resource;
@@ -16,9 +18,9 @@ public class StationCapacityServerImpl {
     @Resource
     private StationCapacityMapper mapper;
 
-    public String add(StationCapacity stationCapacity) {
+    public ResultEnum add(StationCapacity stationCapacity) {
         int insert = mapper.insert(stationCapacity);
-        return ResultUtil.returnString(1, insert);
+        return ResultUtil.returnString(1, insert, BaseResult.INSERT.name());
     }
 
     public StationCapacity select(int id) {
@@ -35,17 +37,17 @@ public class StationCapacityServerImpl {
         return mapper.selectByMap(map);
     }
 
-    public String updateById(StationCapacity stationCapacity) {
+    public ResultEnum updateById(StationCapacity stationCapacity) {
         int i = mapper.updateById(stationCapacity);
-        return ResultUtil.returnString(1, i);
+        return ResultUtil.returnString(1, i, BaseResult.UPDATE.name());
     }
 
-    public String delete(int id) {
-        return ResultUtil.returnString(1, mapper.deleteById(id));
+    public ResultEnum delete(int id) {
+        return ResultUtil.returnString(1, mapper.deleteById(id), BaseResult.DELETE.name());
     }
 
-    public String delete(Map map) {
-        return ResultUtil.returnString(mapper.deleteByMap(map));
+    public ResultEnum delete(Map map) {
+        return ResultUtil.returnString(mapper.deleteByMap(map), BaseResult.DELETE.name());
     }
 
 }

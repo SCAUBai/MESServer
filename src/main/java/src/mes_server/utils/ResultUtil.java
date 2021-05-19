@@ -1,16 +1,26 @@
 package src.mes_server.utils;
 
-import java.security.SecureRandom;
+import src.mes_server.result.ResultEnum;
 
 public class ResultUtil {
-    private static final String success = "true";
-    private static final String fail = "false";
 
-    public static String returnString(int predict, int real) {
-        return predict == real ? success : fail;
+    public static ResultEnum returnString(int predict, int real, String base) {
+        return predict == real ? ResultEnum.SUCCESS : getEnum(base);
     }
 
-    public static String returnString(int real) {
-        return real > 0 ? success : fail;
+    public static ResultEnum returnString(int real, String base) {
+        return real > 0 ? ResultEnum.SUCCESS : getEnum(base);
+    }
+
+    static ResultEnum getEnum(String base) {
+        String name = base + "_FAIL";
+        Class clazz = ResultEnum.class;
+        Object[] enumConstants = clazz.getEnumConstants();
+        for (Object o : enumConstants) {
+            if (name.equals(o.toString())) {
+                return (ResultEnum) o;
+            }
+        }
+        return null;
     }
 }

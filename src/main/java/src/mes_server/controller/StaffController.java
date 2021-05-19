@@ -2,6 +2,7 @@ package src.mes_server.controller;
 
 import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Staff;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.server.StaffServerImpl;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class StaffController {
     private StaffServerImpl server;
 
     @PostMapping("/addST")
-    public String addStaff(@RequestBody Staff staff) {
+    public ResultEnum addStaff(@RequestBody Staff staff) {
         return server.add(staff);
     }
 
@@ -39,17 +40,17 @@ public class StaffController {
     }
 
     @PostMapping("/updateST")
-    public String update(@RequestBody Staff staff) {
+    public ResultEnum update(@RequestBody Staff staff) {
         return server.updateById(staff);
     }
 
     @GetMapping("/deleteST")
-    public String delete(@RequestParam("id") int id) {
+    public ResultEnum delete(@RequestParam("id") int id) {
         return server.delete(id);
     }
 
     @PostMapping("/deleteSTM")
-    public String delete(@RequestParam Map map) {
+    public ResultEnum delete(@RequestParam Map map) {
         return server.delete(map);
     }
 }

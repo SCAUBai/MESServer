@@ -3,6 +3,8 @@ package src.mes_server.server;
 import org.springframework.stereotype.Service;
 import src.mes_server.dao.MaterialMapper;
 import src.mes_server.pojo.Material;
+import src.mes_server.result.BaseResult;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.utils.ResultUtil;
 
 import javax.annotation.Resource;
@@ -14,9 +16,9 @@ public class MaterialServerImpl {
     @Resource
     private MaterialMapper mapper;
 
-    public String add(Material material) {
+    public ResultEnum add(Material material) {
         int insert = mapper.insert(material);
-        return ResultUtil.returnString(1, insert);
+        return ResultUtil.returnString(1, insert, BaseResult.INSERT.name());
     }
 
     public Material select(int id) {
@@ -33,17 +35,17 @@ public class MaterialServerImpl {
         return mapper.selectByMap(map);
     }
 
-    public String updateById(Material equipment) {
+    public ResultEnum updateById(Material equipment) {
         int i = mapper.updateById(equipment);
-        return ResultUtil.returnString(1, i);
+        return ResultUtil.returnString(1, i, BaseResult.UPDATE.name());
     }
 
-    public String delete(int id) {
-        return ResultUtil.returnString(1, mapper.deleteById(id));
+    public ResultEnum delete(int id) {
+        return ResultUtil.returnString(1, mapper.deleteById(id), BaseResult.DELETE.name());
     }
 
-    public String delete(Map map) {
-        return ResultUtil.returnString(mapper.deleteByMap(map));
+    public ResultEnum delete(Map map) {
+        return ResultUtil.returnString(mapper.deleteByMap(map), BaseResult.DELETE.name());
     }
 
 }

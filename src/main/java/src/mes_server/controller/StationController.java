@@ -2,6 +2,7 @@ package src.mes_server.controller;
 
 import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Station;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.server.StationServerImpl;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class StationController {
     private StationServerImpl server;
 
     @PostMapping("/addSTA")
-    public String addStation(@RequestBody Station station) {
+    public ResultEnum addStation(@RequestBody Station station) {
         return server.add(station);
     }
 
@@ -39,17 +40,17 @@ public class StationController {
     }
 
     @PostMapping("/updateSTA")
-    public String update(@RequestBody Station station) {
+    public ResultEnum update(@RequestBody Station station) {
         return server.updateById(station);
     }
 
     @GetMapping("/deleteSTA")
-    public String delete(@RequestParam("id") int id) {
+    public ResultEnum delete(@RequestParam("id") int id) {
         return server.delete(id);
     }
 
     @PostMapping("/deleteSTAM")
-    public String delete(@RequestBody Map map) {
+    public ResultEnum delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }

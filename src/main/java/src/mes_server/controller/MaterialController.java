@@ -2,6 +2,7 @@ package src.mes_server.controller;
 
 import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Material;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.server.MaterialServerImpl;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class MaterialController {
     private MaterialServerImpl server;
 
     @PostMapping("/addMT")
-    public String addMaterial(@RequestBody Material material) {
+    public ResultEnum addMaterial(@RequestBody Material material) {
         return server.add(material);
     }
 
@@ -39,17 +40,17 @@ public class MaterialController {
     }
 
     @PostMapping("/updateMT")
-    public String update(@RequestBody Material material) {
+    public ResultEnum update(@RequestBody Material material) {
         return server.updateById(material);
     }
 
     @GetMapping("/deleteMT")
-    public String delete(@RequestParam int id) {
+    public ResultEnum delete(@RequestParam int id) {
         return server.delete(id);
     }
 
     @PostMapping("/deleteMTM")
-    public String delete(@RequestBody Map map) {
+    public ResultEnum delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }

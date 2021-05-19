@@ -2,6 +2,7 @@ package src.mes_server.controller;
 
 import org.springframework.web.bind.annotation.*;
 import src.mes_server.pojo.Process;
+import src.mes_server.result.ResultEnum;
 import src.mes_server.server.ProcessServerImpl;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ public class ProcessController {
     private ProcessServerImpl server;
 
     @PostMapping("/addPC")
-    public String addProcess(@RequestBody Process process) {
+    public ResultEnum addProcess(@RequestBody Process process) {
         return server.add(process);
     }
 
@@ -39,17 +40,17 @@ public class ProcessController {
     }
 
     @PostMapping("/updatePC")
-    public String update(@RequestBody Process process) {
+    public ResultEnum update(@RequestBody Process process) {
         return server.updateById(process);
     }
 
     @GetMapping("/deletePC")
-    public String delete(@RequestParam int id) {
+    public ResultEnum delete(@RequestParam int id) {
         return server.delete(id);
     }
 
     @PostMapping("/deletePCM")
-    public String delete(@RequestBody Map map) {
+    public ResultEnum delete(@RequestBody Map map) {
         return server.delete(map);
     }
 }
