@@ -1,5 +1,8 @@
 package src.mes_server.result;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ResultEnum {
     SUCCESS("200", "success"),
     SELECT_FAIL("404","查不到相应资源"),
