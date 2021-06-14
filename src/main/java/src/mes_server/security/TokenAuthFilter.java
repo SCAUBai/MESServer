@@ -40,7 +40,7 @@ public class TokenAuthFilter extends BasicAuthenticationFilter {
         System.out.println(token);
         if(token != null) {
             //从token获取用户名
-            String username = tokenManager.getUserInfoFromToken(token);
+            String username = tokenManager.getUserNameFromToken(token);
             Collection<GrantedAuthority> authority = new ArrayList<>();
             System.out.println(token+"," + username);
             return new UsernamePasswordAuthenticationToken(username,token,authority);

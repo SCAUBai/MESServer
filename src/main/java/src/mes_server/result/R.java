@@ -11,40 +11,38 @@ import java.util.Set;
 //统一返回结果的类
 @Data
 public class R {
+    private static final int SUCCESS = 200;
+    public static final int FAILED = 500;
+    public static final int UNAUTHORIZED = 401;
+    public static final int VALIDATE_FAILED = 404;
 
     private Boolean success;
-
     private Integer code;
-
     private String message;
-
-    private Map<String, Object> data = new HashMap<String, Object>();
-
-    //把构造方法私有
+    private Object data;
     private R() {}
 
     //成功静态方法
     public static R ok() {
-        R r = new R();
-        r.setSuccess(true);
-        r.setCode(20000);
-        r.setMessage("成功");
-        return r;
+        return ok(null);
     }
 
-    public static R ok(Object obj) {
-        R r = ok();
-        r.data(obj);
-        return r;
+    public static R ok(Object data) {
+        return new R().success(true).code(SUCCESS).message("成功").data(data);
     }
 
     //失败静态方法
     public static R error() {
+        return error(null);
+    }
+
+    public static R error(Object data) {
         R r = new R();
         r.setSuccess(false);
-        r.setCode(20001);
+        r.setCode(FAILED);
         r.setMessage("失败");
-        return r;
+        r.setData(data);
+        return new R().success(false).code(FAILED).message("失败").data(data);
     }
 
     public R success(Boolean success){
@@ -62,39 +60,23 @@ public class R {
         return this;
     }
 
-    public R data(String key, Object value){
-        this.data.put(key, value);
+    public R data(Object data){
+        this.setData(data);
         return this;
     }
 
-    public R data(Map<String, Object> map){
-        this.setData(map);
-        return this;
-    }
-
-    public R data(Object obj) {
-        Field[] declaredFields = obj.getClass().getDeclaredFields();
-        for (Field declaredField : declaredFields) {
-            try {
-                declaredField.setAccessible(true);
-                String name = declaredField.getName();
-                Object o = declaredField.get(obj);
-                data.put(name, o);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-        return this;
-    }
-
-    public static void main(String[] args) {
-        Staff s = new Staff();
-        s.setId(1);s.setPasswd("1");s.setPermissions(1);s.setWorks("2");
-        R r = new R();
-        r.data(s);
-        Set<String> strings = r.data.keySet();
-        for (String sq : strings) {
-            System.out.println(sq + "," + r.data.get(sq));
-        }
-    }
+//    public R data(Object obj) {
+//        Field[] declaredFields = obj.getClass().getDeclaredFields();
+//        for (Field declaredField : declaredFields) {
+//            try {
+//                declaredField.setAccessible(true);
+//                String name = declaredField.getName();
+//                Object o = declaredField.get(obj);
+//                data.put(name, o);
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return this;
+//    }
 }
